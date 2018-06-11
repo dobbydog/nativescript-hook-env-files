@@ -1,0 +1,18 @@
+{
+  "name": "nativescript-hook-env-files",
+  "version": "1.0.0",
+  "nativescript": {
+    "hooks": [
+      {
+        "type": "after-prepare",
+        "script": "after-prepare-hook.js",
+        "inject": true
+      }
+    ]
+  },
+  "scripts": {
+    "postinstall": "node postinstall.js",
+    "preuninstall": "node preuninstall.js",
+    "test": "exit 0"
+  }
+}
