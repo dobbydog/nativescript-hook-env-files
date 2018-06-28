@@ -1,6 +1,38 @@
 # nativescript-hook-env-files
-NODE_ENVの値によって読み込むファイルを変更するためのフック
+A nativescript hook to replace file according to NODE_ENV value.
 
-## Usages
-`filename.[NODE_ENV].ext`というファイルを作ると`filename.ext`の代わりに使用される
-対象ファイルを使う場合は`filename.ext`を読み込むだけで良い
+## Example
+Project directory structure
+```
+app
+├ env.development.json # {"production": false}
+├ env.production.json  # {"production": true}
+├ main.ts
+├ ...
+```
+In your app code
+```
+const env = require('./env.json');
+
+console.log(env.production); // 'true' if tns build or run with NODE_ENV=production, otherwise 'false'.
+```k
+
+## Webpack+Angular support
+Add `hostReplacementPaths` option to `NativescriptAngularCompilerPlugin` in your `webpack.config.js`.
+```
+// utility method for getting replacement targets.
+const { getReplacementPaths } = require('nativescript-hook-env-files/webpack');
+```
+```
+new nsWebpack.NativeScriptAngularCompilerPlugin({
+    entryModule: resolve(appPath, "app.module#AppModule"),
+    tsConfigPath: join(__dirname, "tsconfig.esm.json"),
+    skipCodeGeneration: !aot,
+    platformOptions: {
+        platform,
+        platforms,
+    },
+    hostReplacementPaths: getReplacementPaths(appFullPath, process.env.NODE_ENV || 'development'), // add this line
+}),
+
+```
