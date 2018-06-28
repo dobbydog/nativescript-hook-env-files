@@ -1,5 +1,6 @@
 # nativescript-hook-env-files
 A nativescript hook to replace file according to NODE_ENV value.
+Inspired by [nativescript-hook-debug-production](https://github.com/markosko/nativescript-hook-debug-production)
 
 ## Example
 Project directory structure
