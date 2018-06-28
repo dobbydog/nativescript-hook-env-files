@@ -15,7 +15,7 @@ In your app code
 const env = require('./env.json');
 
 console.log(env.production); // 'true' if tns build or run with NODE_ENV=production, otherwise 'false'.
-```k
+```
 
 ## Webpack+Angular support
 Add `hostReplacementPaths` option to `NativescriptAngularCompilerPlugin` in your `webpack.config.js`.
