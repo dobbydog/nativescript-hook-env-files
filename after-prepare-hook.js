@@ -3,23 +3,23 @@ const fs = require('fs');
 const { detectTargets, escapeRegExp } = require('./utils')
 
 module.exports = function (logger, platformsData, projectData, hookArgs) {
-	return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
 
-		const projectDir = projectData.projectDir;
-		const platform = hookArgs.platform.toLowerCase();
+    const projectDir = projectData.projectDir;
+    const platform = hookArgs.platform.toLowerCase();
 
-		const platformData = platformsData.getPlatformData(platform);
-		const platformOutDir = platformData.appDestinationDirectoryPath;
-		const platformAppDir = path.join(platformOutDir, 'app');
+    const platformData = platformsData.getPlatformData(platform);
+    const platformOutDir = platformData.appDestinationDirectoryPath;
+    const platformAppDir = path.join(platformOutDir, 'app');
 
     const env = process.env.NODE_ENV || 'development';
 
-		try {
-			walkSync(platformAppDir, env, logger);
-		} catch(e){
-			logger.warn(e);
-			logger.warn('nativescript-hook-env-files failed');
-		}
+    try {
+      walkSync(platformAppDir, env, logger);
+    } catch(e){
+      logger.warn(e);
+      logger.warn('nativescript-hook-env-files failed');
+    }
 
     resolve();
   });
